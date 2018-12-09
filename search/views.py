@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from .forms import NameForm
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the Search index.")
+    return render(request, 'search/index.html')
 
 def getSongRequest(request):
     if request.method == 'POST':
