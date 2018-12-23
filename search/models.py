@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
+
 # Create your models here.
 class UserProfile(models.Model):
     display_name = models.CharField(max_length=200)
@@ -12,8 +13,7 @@ class SearchTrack(models.Model):
 
 class Playlist(models.Model):
     name = models.CharField(max_length=200)
-    user = models.CharField(max_length=200)
-    length = models.IntegerField()
+    length = models.IntegerField(default=0)
     # songs = models.ArrayField(PlaylistTrack())
 
 
