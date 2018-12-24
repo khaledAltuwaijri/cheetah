@@ -3,15 +3,37 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+  <div class="col-sm-10 offset-sm-1 text-center">
 
-<form action="{% url 'password_reset' %}">
-  <input type="submit" value="Reset Password"/>
-</form>
+    <h2>Welcome back!</h2>
+    <h3>If you're here for the first time, create an account</h3>
+    <form class="form-horizontal form" name="LoginForm" method="POST">
+      {% csrf_token %}
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+      {% endif %}
+      <div class="control-group">
+        <label class="control-label" for="id_username">Username or Email</label>
+        <div class="controls">
+            <input class="form-control" type="text" required_id="id_username" name="username"  placeholder="Username">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="id_password">Password</label>
+        <div class="controls">
+            <input class="form-control" type="password" name="password" required_id="id_password" placeholder="Password">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success m-4">Login</button>
+    </form>
+
+    <a href="{% url 'password_reset' %}">
+      <button type="submit" class="btn btn-outline-danger m-2">Forgot your password?</button>
+    </a>
+    <!-- <form action="{% url 'password_reset' %}">
+      <input type="submit" value="Reset Password"/>
+    </form> -->
+  </div>
 
 {% endblock %}
