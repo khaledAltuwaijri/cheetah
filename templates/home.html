@@ -3,43 +3,17 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
-{% load static %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static '/style.css' %}">
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Not {{ user.username }}?</a></p>
-  <p><a href="{% url 'search' %}">Continue to search</a></p>
-{% else %}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Cheetah</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarHome" aria-expanded="false" aria-label="Toggle Home">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarHome">
-      <ul class="navbar-nav ml-auto">
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">
-            <button type="button" class="btn btn-outline-primary">Login</button>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'signup' %}">
-            <button type="button" class="btn btn-success">Create An Account</button>
-          </a>
-        </li>
-
-      </ul>
+<div class="col-sm-10 offset-sm-1 text-center">
+  <div class="jumbotron jumbotron-fluid m-4">
+    <div class="container">
+      <h1 class="display-4">This is Cheetah</h1>
+      <p class="lead">A lightweight and fast music search and filtering engine built on top of Spotify's developer API.</p>
+      <hr class="my-4">
+      <p>Get started by creating an account first, and linking your Cheetah account with an existing Spotify account. Then you can migrate your playlists and start building new ones.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Get started</a>
     </div>
-  </nav>
-  <p>You are not currently logged in.</p>
-{% endif %}
+  </div>
+</div>
+
 {% endblock %}
