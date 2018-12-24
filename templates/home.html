@@ -3,22 +3,43 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static '/style.css' %}">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">Not {{ user.username }}?</a></p>
   <p><a href="{% url 'search' %}">Continue to search</a></p>
 {% else %}
-  <p>Not currently logged in</p>
-  <form action="{% url 'login' %}">
-    <input type="submit" value="Login here"/>
-  </form>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Cheetah</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarHome" aria-expanded="false" aria-label="Toggle Home">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarHome">
+      <ul class="navbar-nav ml-auto">
 
-  <form action="{% url 'signup' %}">
-    <input type="submit" value="Sign up here"/>
-  </form>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">
+            <button type="button" class="btn btn-outline-primary">Login</button>
+          </a>
+        </li>
 
-  <form action="{% url 'password_reset' %}">
-    <input type="submit" value="Reset Password"/>
-  </form>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'signup' %}">
+            <button type="button" class="btn btn-success">Create An Account</button>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <p>You are not currently logged in.</p>
 {% endif %}
 {% endblock %}
