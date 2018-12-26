@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
-
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -8,17 +6,19 @@ class UserProfile(models.Model):
     email = models.CharField(max_length=200)
     country = models.CharField(max_length=100)
 
-class SearchTrack(models.Model):
-    spotifyID = models.CharField(max_length=200)
+class Song(models.Model):
+    name = models.CharField(max_length=200)
+    artist = models.CharField(max_length=200)
 
 class Playlist(models.Model):
     name = models.CharField(max_length=200)
+    tracks = models.ManyToManyField('Song', through="PlaylistTrack")
     length = models.IntegerField(default=0)
-    # songs = models.ArrayField(PlaylistTrack())
-
 
 class PlaylistTrack(models.Model):
-    playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    artist = models.CharField(max_length=50)
-    length_ms = models.IntegerField()
+    playlist = models.ForeignKey('search.Playlist', on_delete=models.CASCADE)
+    song = models.ForeignKey('search.Song', on_delete=models.CASCADE)
+    position = models.IntegerField(default=0) #TODO: This default may need to change
+
+    # class Meta:
+    #     ordering= ['position']
