@@ -5,11 +5,11 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
-from users.forms import CustomUserCreationForm
+from users.forms import UserCreationForm
 
 class SignUp(View):
 
-    form_class = CustomUserCreationForm
+    form_class = UserCreationForm
     template_name = 'signup.html'
 
     def get(self, request, *args, **kwargs):
@@ -18,7 +18,7 @@ class SignUp(View):
 
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            form = CustomUserCreationForm(request.POST)
+            form = UserCreationForm(request.POST)
             if form.is_valid():
                 form.save()
                 username = form.cleaned_data.get('username')
@@ -29,5 +29,5 @@ class SignUp(View):
             else:
                 messages.error(request, "Error")
         else:
-            form = CustomUserCreationForm()
+            form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})

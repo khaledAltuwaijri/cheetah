@@ -4,7 +4,7 @@ from django.db import models
 
 # User = get_user_model()
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
 
     location = models.CharField(max_length=30, blank=True)
     birthday = models.DateField(null=True, blank=True)
